@@ -9,7 +9,8 @@ var exec = require("child_process").exec;
 
 function PDFImage(pdfFilePath, options) {
   // validating the file path for invalid characters to prevent remote code execution
-  if (/;|&|`|\$|\(|\)|\|\||\||!|>|<|\?|\${/g.test(pdfFilePath)) {
+  var filter_chars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/;
+  if (filter_chars.test(pdfFilePath)) {
     console.log("\nERROR: The file path contains invalid characters\n");
     return;
   }
